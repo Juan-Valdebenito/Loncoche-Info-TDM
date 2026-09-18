@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { noticia, destacada = false } = Astro.props;
-const { titulo, resumen, fecha, categoria } = noticia.data;
+const { titulo, resumen, fecha, categoria, imagen } = noticia.data;
 
 const fechaFormateada = fecha.toLocaleDateString('es-CL', {
   day: 'numeric',
@@ -30,6 +30,13 @@ const categoriaColor: Record<string, string> = {
     destacada ? 'md:col-span-2' : '',
   ]}
 >
+  {imagen && (
+    <img
+      src={imagen}
+      alt={titulo}
+      class:list={['w-full object-cover', destacada ? 'h-56 md:h-72' : 'h-40']}
+    />
+  )}
   <div class:list={['p-6', destacada ? 'md:p-8' : '']}>
     <div class="flex items-center gap-3 mb-3">
       <span class:list={['text-xs font-semibold px-3 py-1 rounded-full', categoriaColor[categoria]]}>

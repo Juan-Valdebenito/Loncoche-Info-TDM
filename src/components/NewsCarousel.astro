@@ -1,0 +1,146 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  noticias: CollectionEntry<'noticias'>[];
+}
+
+const { noticias } = Astro.props;
+
+const categoriaColor: Record<string, string> = {
+  Resultados: 'bg-pelota-500 text-cancha-900',
+  Convocatorias: 'bg-cancha-400 text-cancha-900',
+  Torneos: 'bg-white/90 text-cancha-800',
+  Institucional: 'bg-slate-200 text-slate-800',
+};
+---
+
+{noticias.length > 0 && (
+  <div class="carrusel-noticias relative" data-autoplay="5000">
+    <div class="carrusel-track flex overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar">
+      {noticias.map((noticia) => {
+        const { titulo, resumen, fecha, categoria, imagen } = noticia.data;
+        const fechaFormateada = fecha.toLocaleDateString('es-CL', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        });
+        return (
+          <a
+            href={`/noticias/${noticia.slug}`}
+            class="carrusel-slide snap-start shrink-0 w-full relative flex items-end min-h-[22rem] md:min-h-[26rem] overflow-hidden group"
+          >
+            {imagen ? (
+              <img
+                src={imagen}
+                alt={titulo}
+                class="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            ) : (
+              <div class="absolute inset-0 bg-gradient-to-br from-cancha-700 via-cancha-800 to-cancha-900" />
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+
+            <div class="relative z-10 max-w-3xl mx-auto w-full px-4 md:px-6 pb-10 md:pb-14 text-left">
+              <div class="flex items-center gap-3 mb-3">
+                <span class:list={['text-xs font-semibold px-3 py-1 rounded-full', categoriaColor[categoria]]}>
+                  {categoria}
+                </span>
+                <time class="text-xs text-white/70">{fechaFormateada}</time>
+              </div>
+              <h2 class="font-display font-extrabold text-2xl md:text-4xl text-white leading-tight mb-2">
+                {titulo}
+              </h2>
+              <p class="text-white/80 text-sm md:text-base max-w-xl line-clamp-2">{resumen}</p>
+              <span class="inline-block mt-4 text-sm font-semibold text-pelota-400 group-hover:translate-x-1 transition-transform">
+                Leer más →
+              </span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    {noticias.length > 1 && (
+      <>
+        <button type="button" class="carrusel-prev absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 h-9 w-9 md:h-10 md:w-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm transition-colors" aria-label="Noticia anterior">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button type="button" class="carrusel-next absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 h-9 w-9 md:h-10 md:w-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm transition-colors" aria-label="Siguiente noticia">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+
+        <div class="carrusel-dots absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {noticias.map((_, i) => (
+            <button
+              type="button"
+              class="carrusel-dot h-2.5 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-colors data-[active=true]:bg-pelota-500 data-[active=true]:w-6"
+              data-index={i}
+              aria-label={`Ir a la noticia ${i + 1}`}
+            />
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+)}
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  function initCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>('.carrusel-track');
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.carrusel-slide'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.carrusel-dot'));
+    const prevBtn = root.querySelector<HTMLElement>('.carrusel-prev');
+    const nextBtn = root.querySelector<HTMLElement>('.carrusel-next');
+    if (!track || slides.length === 0) return;
+
+    const delay = Number(root.dataset.autoplay ?? '5000');
+    let index = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+
+    function goTo(i: number) {
+      index = (i + slides.length) % slides.length;
+      track!.scrollTo({ left: slides[index].offsetLeft, behavior: 'smooth' });
+      dots.forEach((d, di) => d.dataset.active = String(di === index));
+    }
+
+    function start() {
+      stop();
+      timer = setInterval(() => goTo(index + 1), delay);
+    }
+    function stop() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    dots.forEach((dot) => dot.addEventListener('click', () => { goTo(Number(dot.dataset.index)); start(); }));
+    prevBtn?.addEventListener('click', () => { goTo(index - 1); start(); });
+    nextBtn?.addEventListener('click', () => { goTo(index + 1); start(); });
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('touchstart', stop, { passive: true });
+    root.addEventListener('touchend', start, { passive: true });
+
+    goTo(0);
+    start();
+  }
+
+  document.querySelectorAll<HTMLElement>('.carrusel-noticias').forEach(initCarousel);
+</script>

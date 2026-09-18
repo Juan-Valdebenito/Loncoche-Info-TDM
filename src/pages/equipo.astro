@@ -13,6 +13,13 @@ const cuerpoTecnico = [
   { nombre: 'Nombre Apellido', rol: 'Entrenador/a principal' },
   { nombre: 'Nombre Apellido', rol: 'Preparador/a físico' },
 ];
+
+// Ranking de todos los jugadores del taller. Pendiente: reemplazar por los nombres reales.
+const ranking = [
+  { posicion: 1, nombre: 'Pendiente', categoria: '—', puntos: '—' },
+  { posicion: 2, nombre: 'Pendiente', categoria: '—', puntos: '—' },
+  { posicion: 3, nombre: 'Pendiente', categoria: '—', puntos: '—' },
+];
 ---
 
 <Layout title="Equipo" description="Conoce a los jugadores y cuerpo técnico de la Selección de Tenis de Mesa de Loncoche.">
@@ -37,7 +44,7 @@ const cuerpoTecnico = [
     </div>
 
     <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Cuerpo Técnico</h2>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
       {cuerpoTecnico.map((c) => (
         <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
           <div class="mx-auto h-16 w-16 rounded-full bg-pelota-100 text-pelota-600 flex items-center justify-center font-display font-bold text-xl mb-3">
@@ -49,8 +56,35 @@ const cuerpoTecnico = [
       ))}
     </div>
 
+    <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Ranking del taller</h2>
+    <p class="text-slate-600 mb-4 max-w-2xl text-sm">
+      Listado con todos los integrantes del taller de tenis de mesa. Se actualizará con los nombres y categorías reales.
+    </p>
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm mb-4">
+      <table class="w-full text-sm text-left">
+        <thead class="bg-cancha-800 text-white">
+          <tr>
+            <th class="px-4 py-3 font-semibold">#</th>
+            <th class="px-4 py-3 font-semibold">Nombre</th>
+            <th class="px-4 py-3 font-semibold">Categoría</th>
+            <th class="px-4 py-3 font-semibold">Puntos</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200">
+          {ranking.map((r) => (
+            <tr class="odd:bg-white even:bg-slate-50">
+              <td class="px-4 py-3 font-semibold text-cancha-700">{r.posicion}</td>
+              <td class="px-4 py-3 text-cancha-900">{r.nombre}</td>
+              <td class="px-4 py-3 text-slate-600">{r.categoria}</td>
+              <td class="px-4 py-3 text-slate-600">{r.puntos}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
     <p class="text-xs text-slate-400 mt-10">
-      * Edita src/pages/equipo.astro para actualizar los nombres reales del plantel.
+      * Edita src/pages/equipo.astro para actualizar los nombres reales del plantel y el ranking del taller.
     </p>
   </section>
 </Layout>
