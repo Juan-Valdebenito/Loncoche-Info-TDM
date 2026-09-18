@@ -1,0 +1,57 @@
+---
+const navItems = [
+  { href: '/', label: 'Inicio' },
+  { href: '/noticias', label: 'Noticias' },
+  { href: '/equipo', label: 'Equipo' },
+  { href: '/calendario', label: 'Calendario' },
+  { href: '/contacto', label: 'Contacto' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-cancha-800 text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="flex h-11 w-11 items-center justify-center rounded-full bg-pelota-500 text-cancha-900 font-display font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
+        TDM
+      </span>
+      <div class="leading-tight">
+        <p class="font-display font-bold text-lg tracking-tight">Loncoche TDM</p>
+        <p class="text-xs text-cancha-200 uppercase tracking-widest">Noticiero Oficial</p>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-1">
+      {navItems.map((item) => {
+        const isActive = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'px-4 py-2 rounded-full text-sm font-medium transition-colors',
+              isActive ? 'bg-pelota-500 text-cancha-900' : 'text-cancha-100 hover:bg-cancha-700',
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <details class="md:hidden relative">
+      <summary class="list-none cursor-pointer rounded-md p-2 hover:bg-cancha-700">
+        <span class="sr-only">Menú</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </summary>
+      <div class="absolute right-0 mt-2 w-48 rounded-xl bg-cancha-800 border border-cancha-700 shadow-xl overflow-hidden">
+        {navItems.map((item) => (
+          <a href={item.href} class="block px-4 py-3 text-sm text-cancha-100 hover:bg-cancha-700 border-b border-cancha-700 last:border-0">
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </details>
+  </div>
+</header>

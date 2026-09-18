@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { getCollection } from 'astro:content';
+
+const todas = await getCollection('noticias');
+const ordenadas = todas.sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf());
+---
+
+<Layout title="Noticias" description="Todas las noticias de la Selección de Tenis de Mesa de Loncoche.">
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="font-display font-bold text-3xl text-cancha-900 mb-8">Todas las noticias</h1>
+
+    {ordenadas.length === 0 ? (
+      <p class="text-slate-500">Todavía no hay noticias publicadas.</p>
+    ) : (
+      <div class="grid gap-6 md:grid-cols-2">
+        {ordenadas.map((noticia) => <NewsCard noticia={noticia} />)}
+      </div>
+    )}
+  </section>
+</Layout>

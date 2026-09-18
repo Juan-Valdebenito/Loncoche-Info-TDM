@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const noticias = await getCollection('noticias');
+  return noticias.map((noticia) => ({
+    params: { slug: noticia.slug },
+    props: { noticia },
+  }));
+}
+
+interface Props {
+  noticia: CollectionEntry<'noticias'>;
+}
+
+const { noticia } = Astro.props;
+const { titulo, resumen, fecha, autor, categoria } = noticia.data;
+const { Content } = await noticia.render();
+
+const fechaFormateada = fecha.toLocaleDateString('es-CL', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Layout title={titulo} description={resumen}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <a href="/noticias" class="text-sm font-semibold text-cancha-600 hover:text-cancha-800">← Volver a noticias</a>
+
+    <div class="flex items-center gap-3 mt-6 mb-4">
+      <span class="text-xs font-semibold px-3 py-1 rounded-full bg-cancha-700 text-white">{categoria}</span>
+      <time class="text-xs text-slate-500">{fechaFormateada}</time>
+    </div>
+
+    <h1 class="font-display font-extrabold text-3xl md:text-4xl text-cancha-900 mb-3">{titulo}</h1>
+    <p class="text-slate-500 text-sm mb-8">Por {autor}</p>
+
+    <div class="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-cancha-600">
+      <Content />
+    </div>
+  </article>
+</Layout>

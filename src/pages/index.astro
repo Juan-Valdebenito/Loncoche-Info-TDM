@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NewsCard from '../components/NewsCard.astro';
+import { getCollection } from 'astro:content';
+
+const todas = await getCollection('noticias');
+const ordenadas = todas.sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf());
+const destacada = ordenadas.find((n) => n.data.destacada) ?? ordenadas[0];
+const resto = ordenadas.filter((n) => n.slug !== destacada?.slug).slice(0, 5);
+---
+
+<Layout title="Inicio">
+  <section class="bg-gradient-to-br from-cancha-800 to-cancha-600 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20 text-center">
+      <p class="uppercase tracking-[0.3em] text-pelota-400 text-xs font-semibold mb-4">Noticiero oficial</p>
+      <h1 class="font-display font-extrabold text-3xl md:text-5xl leading-tight max-w-3xl mx-auto">
+        Selección de Tenis de Mesa de Loncoche
+      </h1>
+      <p class="mt-4 text-cancha-100 max-w-xl mx-auto">
+        Resultados, convocatorias y toda la actualidad del equipo que representa a nuestra comuna.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="font-display font-bold text-2xl text-cancha-900">Últimas noticias</h2>
+      <a href="/noticias" class="text-sm font-semibold text-cancha-600 hover:text-cancha-800">Ver todas →</a>
+    </div>
+
+    {ordenadas.length === 0 ? (
+      <p class="text-slate-500">Todavía no hay noticias publicadas.</p>
+    ) : (
+      <div class="grid gap-6 md:grid-cols-2">
+        {destacada && <NewsCard noticia={destacada} destacada />}
+        {resto.map((noticia) => <NewsCard noticia={noticia} />)}
+      </div>
+    )}
+  </section>
+</Layout>

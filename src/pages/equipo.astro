@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Edita este arreglo para mantener actualizado el plantel.
+const jugadores = [
+  { nombre: 'Nombre Apellido', categoria: 'Sub-15', rol: 'Jugador/a' },
+  { nombre: 'Nombre Apellido', categoria: 'Sub-18', rol: 'Jugador/a' },
+  { nombre: 'Nombre Apellido', categoria: 'Adulto', rol: 'Jugador/a' },
+  { nombre: 'Nombre Apellido', categoria: 'Adulto', rol: 'Capitán/a' },
+];
+
+const cuerpoTecnico = [
+  { nombre: 'Nombre Apellido', rol: 'Entrenador/a principal' },
+  { nombre: 'Nombre Apellido', rol: 'Preparador/a físico' },
+];
+---
+
+<Layout title="Equipo" description="Conoce a los jugadores y cuerpo técnico de la Selección de Tenis de Mesa de Loncoche.">
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="font-display font-bold text-3xl text-cancha-900 mb-2">Nuestro Equipo</h1>
+    <p class="text-slate-600 mb-10 max-w-2xl">
+      Conoce a los deportistas y al cuerpo técnico que representan a la comuna de Loncoche en el tenis de mesa regional y nacional.
+    </p>
+
+    <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Jugadores</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
+      {jugadores.map((j) => (
+        <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
+          <div class="mx-auto h-16 w-16 rounded-full bg-cancha-100 text-cancha-700 flex items-center justify-center font-display font-bold text-xl mb-3">
+            {j.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+          </div>
+          <p class="font-semibold text-cancha-900">{j.nombre}</p>
+          <p class="text-xs text-pelota-600 font-medium mt-1">{j.rol}</p>
+          <p class="text-xs text-slate-500">{j.categoria}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Cuerpo Técnico</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {cuerpoTecnico.map((c) => (
+        <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
+          <div class="mx-auto h-16 w-16 rounded-full bg-pelota-100 text-pelota-600 flex items-center justify-center font-display font-bold text-xl mb-3">
+            {c.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+          </div>
+          <p class="font-semibold text-cancha-900">{c.nombre}</p>
+          <p class="text-xs text-slate-500 mt-1">{c.rol}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-xs text-slate-400 mt-10">
+      * Edita src/pages/equipo.astro para actualizar los nombres reales del plantel.
+    </p>
+  </section>
+</Layout>

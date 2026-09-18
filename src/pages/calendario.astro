@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Edita este arreglo para mantener actualizado el calendario de competencias.
+const eventos = [
+  { fecha: '2026-09-27', nombre: 'Torneo Regional La Araucanía', lugar: 'Temuco', estado: 'Confirmado' },
+  { fecha: '2026-10-18', nombre: 'Copa Amistad Loncoche', lugar: 'Gimnasio Municipal, Loncoche', estado: 'Por confirmar' },
+  { fecha: '2026-11-08', nombre: 'Campeonato Nacional Clasificatorio', lugar: 'Santiago', estado: 'Por confirmar' },
+];
+
+const estadoColor: Record<string, string> = {
+  Confirmado: 'bg-emerald-100 text-emerald-700',
+  'Por confirmar': 'bg-amber-100 text-amber-700',
+};
+
+function formatear(fecha: string) {
+  return new Date(`${fecha}T00:00:00`).toLocaleDateString('es-CL', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+---
+
+<Layout title="Calendario" description="Próximas fechas y torneos de la Selección de Tenis de Mesa de Loncoche.">
+  <section class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="font-display font-bold text-3xl text-cancha-900 mb-2">Calendario de Competencias</h1>
+    <p class="text-slate-600 mb-10 max-w-2xl">
+      Próximos torneos y actividades en los que participará la Selección de Tenis de Mesa de Loncoche.
+    </p>
+
+    <div class="space-y-4">
+      {eventos.map((e) => (
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+          <div class="sm:w-40 shrink-0">
+            <p class="font-display font-bold text-cancha-700 text-sm">{formatear(e.fecha)}</p>
+          </div>
+          <div class="flex-1">
+            <p class="font-semibold text-cancha-900">{e.nombre}</p>
+            <p class="text-sm text-slate-500">{e.lugar}</p>
+          </div>
+          <span class:list={['text-xs font-semibold px-3 py-1 rounded-full self-start sm:self-center', estadoColor[e.estado]]}>
+            {e.estado}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-xs text-slate-400 mt-10">
+      * Edita src/pages/calendario.astro para actualizar las fechas reales de competencias.
+    </p>
+  </section>
+</Layout>
