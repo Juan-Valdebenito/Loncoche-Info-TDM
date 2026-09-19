@@ -1,17 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Edita este arreglo para mantener actualizado el plantel.
-const jugadores = [
-  { nombre: 'Nombre Apellido', categoria: 'Sub-15', rol: 'Jugador/a' },
-  { nombre: 'Nombre Apellido', categoria: 'Sub-18', rol: 'Jugador/a' },
-  { nombre: 'Nombre Apellido', categoria: 'Adulto', rol: 'Jugador/a' },
-  { nombre: 'Nombre Apellido', categoria: 'Adulto', rol: 'Capitán/a' },
-];
+// Pendiente: agregar aquí los jugadores del taller cuando se confirmen los nombres.
+const jugadores: { nombre: string; categoria: string; rol: string }[] = [];
 
 const cuerpoTecnico = [
-  { nombre: 'Nombre Apellido', rol: 'Entrenador/a principal' },
-  { nombre: 'Nombre Apellido', rol: 'Preparador/a físico' },
+  { nombre: 'Sebastián Urrutia', rol: 'Entrenador ITTF' },
 ];
 
 // Ranking de todos los jugadores del taller. Pendiente: reemplazar por los nombres reales.
@@ -30,18 +24,22 @@ const ranking = [
     </p>
 
     <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Jugadores</h2>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
-      {jugadores.map((j) => (
-        <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
-          <div class="mx-auto h-16 w-16 rounded-full bg-cancha-100 text-cancha-700 flex items-center justify-center font-display font-bold text-xl mb-3">
-            {j.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+    {jugadores.length === 0 ? (
+      <p class="text-slate-500 text-sm mb-12">Próximamente publicaremos la nómina de jugadores.</p>
+    ) : (
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
+        {jugadores.map((j) => (
+          <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
+            <div class="mx-auto h-16 w-16 rounded-full bg-cancha-100 text-cancha-700 flex items-center justify-center font-display font-bold text-xl mb-3">
+              {j.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+            </div>
+            <p class="font-semibold text-cancha-900">{j.nombre}</p>
+            <p class="text-xs text-pelota-600 font-medium mt-1">{j.rol}</p>
+            <p class="text-xs text-slate-500">{j.categoria}</p>
           </div>
-          <p class="font-semibold text-cancha-900">{j.nombre}</p>
-          <p class="text-xs text-pelota-600 font-medium mt-1">{j.rol}</p>
-          <p class="text-xs text-slate-500">{j.categoria}</p>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    )}
 
     <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Cuerpo Técnico</h2>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
@@ -82,9 +80,5 @@ const ranking = [
         </tbody>
       </table>
     </div>
-
-    <p class="text-xs text-slate-400 mt-10">
-      * Edita src/pages/equipo.astro para actualizar los nombres reales del plantel y el ranking del taller.
-    </p>
   </section>
 </Layout>
