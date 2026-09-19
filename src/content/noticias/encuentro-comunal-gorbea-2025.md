@@ -5,7 +5,7 @@ fecha: 2025-10-26
 autor: "Taller de Tenis de Mesa Municipal de Loncoche"
 categoria: "Resultados"
 # imagen: "/images/noticias/gorbea-2025.jpg"
-destacada: true
+destacada: false
 ---
 
 El pasado domingo 26 de octubre se realizó en la comuna de Gorbea un emocionante Encuentro Deportivo de Tenis de Mesa, que reunió a cerca de 30 jugadores de las comunas de Loncoche y Gorbea.
