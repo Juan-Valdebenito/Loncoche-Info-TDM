@@ -1,8 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Pendiente: agregar aquí los jugadores del taller cuando se confirmen los nombres.
-const jugadores: { nombre: string; categoria: string; rol: string }[] = [];
+// Espacio de previsualización para 7 jugadores. Reemplaza nombre/categoria y agrega
+// foto: '/images/jugadores/archivo.jpg' cuando tengamos los datos y fotos reales.
+const jugadores: { nombre: string; categoria: string; foto?: string }[] = [
+  { nombre: 'Jugador 1', categoria: '—' },
+  { nombre: 'Jugador 2', categoria: '—' },
+  { nombre: 'Jugador 3', categoria: '—' },
+  { nombre: 'Jugador 4', categoria: '—' },
+  { nombre: 'Jugador 5', categoria: '—' },
+  { nombre: 'Jugador 6', categoria: '—' },
+  { nombre: 'Jugador 7', categoria: '—' },
+];
 
 const cuerpoTecnico = [
   { nombre: 'Sebastián Urrutia', rol: 'Entrenador ITTF' },
@@ -24,22 +33,26 @@ const ranking = [
     </p>
 
     <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Jugadores</h2>
-    {jugadores.length === 0 ? (
-      <p class="text-slate-500 text-sm mb-12">Próximamente publicaremos la nómina de jugadores.</p>
-    ) : (
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
-        {jugadores.map((j) => (
-          <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
-            <div class="mx-auto h-16 w-16 rounded-full bg-cancha-100 text-cancha-700 flex items-center justify-center font-display font-bold text-xl mb-3">
-              {j.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+    <p class="text-slate-500 text-sm mb-4 max-w-2xl">
+      Espacio de previsualización — los nombres y fotos reales se agregarán próximamente.
+    </p>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
+      {jugadores.map((j) => (
+        <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
+          {j.foto ? (
+            <img src={j.foto} alt={j.nombre} class="mx-auto h-20 w-20 rounded-full object-cover mb-3" />
+          ) : (
+            <div class="mx-auto h-20 w-20 rounded-full bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-slate-300" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12Zm0 2.5c-3.3 0-9.8 1.6-9.8 4.9v2.4h19.6v-2.4c0-3.3-6.5-4.9-9.8-4.9Z" />
+              </svg>
             </div>
-            <p class="font-semibold text-cancha-900">{j.nombre}</p>
-            <p class="text-xs text-pelota-600 font-medium mt-1">{j.rol}</p>
-            <p class="text-xs text-slate-500">{j.categoria}</p>
-          </div>
-        ))}
-      </div>
-    )}
+          )}
+          <p class="font-semibold text-cancha-900">{j.nombre}</p>
+          <p class="text-xs text-slate-500">{j.categoria}</p>
+        </div>
+      ))}
+    </div>
 
     <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Cuerpo Técnico</h2>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
