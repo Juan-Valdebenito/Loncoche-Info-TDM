@@ -31,11 +31,17 @@ const categoriaColor: Record<string, string> = {
   ]}
 >
   {imagen && (
-    <img
-      src={imagen}
-      alt={titulo}
-      class:list={['w-full object-cover', destacada ? 'h-56 md:h-72' : 'h-40']}
-    />
+    <div class="relative overflow-hidden">
+      <img
+        src={imagen}
+        alt={titulo}
+        class:list={[
+          'w-full object-cover object-top saturate-[1.08] contrast-[1.03] group-hover:scale-105 transition-transform duration-500',
+          destacada ? 'h-56 md:h-72' : 'h-40',
+        ]}
+      />
+      <div class="absolute inset-0 bg-cancha-900/10 mix-blend-multiply" />
+    </div>
   )}
   <div class:list={['p-6', destacada ? 'md:p-8' : '']}>
     <div class="flex items-center gap-3 mb-3">
