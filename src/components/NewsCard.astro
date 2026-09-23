@@ -26,7 +26,7 @@ const categoriaColor: Record<string, string> = {
 <a
   href={`/noticias/${noticia.slug}`}
   class:list={[
-    'group block rounded-2xl bg-white shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all',
+    'group block rounded-2xl bg-white dark:bg-cancha-900 shadow-sm border border-slate-200 dark:border-cancha-700 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all',
     destacada ? 'md:col-span-2' : '',
   ]}
 >
@@ -48,13 +48,13 @@ const categoriaColor: Record<string, string> = {
       <span class:list={['text-xs font-semibold px-3 py-1 rounded-full', categoriaColor[categoria]]}>
         {categoria}
       </span>
-      <time class="text-xs text-slate-500">{fechaFormateada}</time>
+      <time class="text-xs text-slate-500 dark:text-slate-400">{fechaFormateada}</time>
     </div>
-    <h3 class:list={['font-display font-bold text-cancha-900 group-hover:text-cancha-600 transition-colors', destacada ? 'text-2xl md:text-3xl mb-3' : 'text-lg mb-2']}>
+    <h3 class:list={['font-display font-bold text-cancha-900 dark:text-white group-hover:text-cancha-600 dark:group-hover:text-pelota-400 transition-colors', destacada ? 'text-2xl md:text-3xl mb-3' : 'text-lg mb-2']}>
       {titulo}
     </h3>
-    <p class:list={['text-slate-600', destacada ? 'text-base' : 'text-sm']}>{resumen}</p>
-    <span class="inline-block mt-4 text-sm font-semibold text-cancha-600 group-hover:translate-x-1 transition-transform">
+    <p class:list={['text-slate-600 dark:text-slate-300', destacada ? 'text-base' : 'text-sm']}>{resumen}</p>
+    <span class="inline-block mt-4 text-sm font-semibold text-cancha-600 dark:text-pelota-400 group-hover:translate-x-1 transition-transform">
       Leer más →
     </span>
   </div>

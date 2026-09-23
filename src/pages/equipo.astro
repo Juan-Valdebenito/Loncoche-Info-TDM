@@ -27,51 +27,51 @@ const ranking = [
 
 <Layout title="Equipo" description="Conoce a los jugadores y cuerpo técnico de la Selección de Tenis de Mesa de Loncoche.">
   <section class="max-w-6xl mx-auto px-4 py-12">
-    <h1 class="font-display font-bold text-3xl text-cancha-900 mb-2">Nuestro Equipo</h1>
-    <p class="text-slate-600 mb-10 max-w-2xl">
+    <h1 class="font-display font-bold text-3xl text-cancha-900 dark:text-white mb-2">Nuestro Equipo</h1>
+    <p class="text-slate-600 dark:text-slate-300 mb-10 max-w-2xl">
       Conoce a los deportistas y al cuerpo técnico que representan a la comuna de Loncoche en el tenis de mesa regional y nacional.
     </p>
 
-    <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4">Jugadores</h2>
-    <p class="text-slate-500 text-sm mb-4 max-w-2xl">
+    <h2 class="font-display font-semibold text-xl text-cancha-800 dark:text-white mb-4">Jugadores</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4 max-w-2xl">
       Espacio de previsualización — los nombres y fotos reales se agregarán próximamente.
     </p>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
       {jugadores.map((j) => (
-        <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
+        <div class="rounded-2xl bg-white dark:bg-cancha-900 border border-slate-200 dark:border-cancha-700 p-5 shadow-sm text-center">
           {j.foto ? (
             <img src={j.foto} alt={j.nombre} class="mx-auto h-20 w-20 rounded-full object-cover mb-3" />
           ) : (
-            <div class="mx-auto h-20 w-20 rounded-full bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center mb-3">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-slate-300" fill="currentColor" viewBox="0 0 24 24">
+            <div class="mx-auto h-20 w-20 rounded-full bg-slate-100 dark:bg-cancha-800 border-2 border-dashed border-slate-300 dark:border-cancha-600 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-slate-300 dark:text-cancha-600" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12Zm0 2.5c-3.3 0-9.8 1.6-9.8 4.9v2.4h19.6v-2.4c0-3.3-6.5-4.9-9.8-4.9Z" />
               </svg>
             </div>
           )}
-          <p class="font-semibold text-cancha-900">{j.nombre}</p>
-          <p class="text-xs text-slate-500">{j.categoria}</p>
+          <p class="font-semibold text-cancha-900 dark:text-white">{j.nombre}</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">{j.categoria}</p>
         </div>
       ))}
     </div>
 
-    <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4 pt-10 border-t border-slate-200">Cuerpo Técnico</h2>
+    <h2 class="font-display font-semibold text-xl text-cancha-800 dark:text-white mb-4 pt-10 border-t border-slate-200 dark:border-cancha-800">Cuerpo Técnico</h2>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
       {cuerpoTecnico.map((c) => (
-        <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm text-center">
-          <div class="mx-auto h-16 w-16 rounded-full bg-pelota-100 text-pelota-600 flex items-center justify-center font-display font-bold text-xl mb-3">
+        <div class="rounded-2xl bg-white dark:bg-cancha-900 border border-slate-200 dark:border-cancha-700 p-5 shadow-sm text-center">
+          <div class="mx-auto h-16 w-16 rounded-full bg-pelota-100 dark:bg-pelota-500/20 text-pelota-600 dark:text-pelota-400 flex items-center justify-center font-display font-bold text-xl mb-3">
             {c.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
           </div>
-          <p class="font-semibold text-cancha-900">{c.nombre}</p>
-          <p class="text-xs text-slate-500 mt-1">{c.rol}</p>
+          <p class="font-semibold text-cancha-900 dark:text-white">{c.nombre}</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{c.rol}</p>
         </div>
       ))}
     </div>
 
-    <h2 class="font-display font-semibold text-xl text-cancha-800 mb-4 pt-10 border-t border-slate-200">Ranking del taller</h2>
-    <p class="text-slate-600 mb-4 max-w-2xl text-sm">
+    <h2 class="font-display font-semibold text-xl text-cancha-800 dark:text-white mb-4 pt-10 border-t border-slate-200 dark:border-cancha-800">Ranking del taller</h2>
+    <p class="text-slate-600 dark:text-slate-300 mb-4 max-w-2xl text-sm">
       Listado con todos los integrantes del taller de tenis de mesa. Se actualizará con los nombres y categorías reales.
     </p>
-    <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm mb-4">
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-cancha-700 bg-white dark:bg-cancha-900 shadow-sm mb-4">
       <table class="w-full text-sm text-left">
         <thead class="bg-cancha-800 text-white">
           <tr>
@@ -81,13 +81,13 @@ const ranking = [
             <th class="px-4 py-3 font-semibold">Puntos</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-200">
+        <tbody class="divide-y divide-slate-200 dark:divide-cancha-800">
           {ranking.map((r) => (
-            <tr class="odd:bg-white even:bg-slate-50">
-              <td class="px-4 py-3 font-semibold text-cancha-700">{r.posicion}</td>
-              <td class="px-4 py-3 text-cancha-900">{r.nombre}</td>
-              <td class="px-4 py-3 text-slate-600">{r.categoria}</td>
-              <td class="px-4 py-3 text-slate-600">{r.puntos}</td>
+            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-cancha-900 dark:even:bg-cancha-800/60">
+              <td class="px-4 py-3 font-semibold text-cancha-700 dark:text-pelota-400">{r.posicion}</td>
+              <td class="px-4 py-3 text-cancha-900 dark:text-white">{r.nombre}</td>
+              <td class="px-4 py-3 text-slate-600 dark:text-slate-300">{r.categoria}</td>
+              <td class="px-4 py-3 text-slate-600 dark:text-slate-300">{r.puntos}</td>
             </tr>
           ))}
         </tbody>

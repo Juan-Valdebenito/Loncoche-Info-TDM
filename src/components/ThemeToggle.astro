@@ -1,0 +1,38 @@
+---
+---
+
+<button
+  type="button"
+  class="theme-toggle flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-cancha-100 hover:bg-cancha-700 transition-colors"
+  aria-label="Cambiar a modo oscuro"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="theme-icon-light h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1.5m0 15V21m9-9h-1.5m-15 0H3m15.36-6.36-1.06 1.06M6.7 17.3l-1.06 1.06m0-12.72L6.7 6.7m10.6 10.6 1.06 1.06M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
+  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" class="theme-icon-dark hidden h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M21.53 15.34a9.5 9.5 0 0 1-12.02-12A9.5 9.5 0 1 0 21.53 15.34Z" />
+  </svg>
+</button>
+
+<script is:inline>
+  function applyThemeIcon(root) {
+    const isDark = document.documentElement.classList.contains('dark');
+    root.querySelectorAll('.theme-toggle').forEach((btn) => {
+      btn.querySelector('.theme-icon-light')?.classList.toggle('hidden', isDark);
+      btn.querySelector('.theme-icon-dark')?.classList.toggle('hidden', !isDark);
+      btn.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    });
+  }
+
+  document.querySelectorAll('.theme-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try {
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      } catch (e) {}
+      applyThemeIcon(document);
+    });
+  });
+
+  applyThemeIcon(document);
+</script>

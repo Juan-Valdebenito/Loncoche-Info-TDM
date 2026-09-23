@@ -27,17 +27,17 @@ const fechaFormateada = fecha.toLocaleDateString('es-CL', {
 
 <Layout title={titulo} description={resumen}>
   <article class="max-w-3xl mx-auto px-4 py-12">
-    <a href="/noticias" class="text-sm font-semibold text-cancha-600 hover:text-cancha-800">← Volver a noticias</a>
+    <a href="/noticias" class="text-sm font-semibold text-cancha-600 dark:text-pelota-400 hover:text-cancha-800 dark:hover:text-pelota-300">← Volver a noticias</a>
 
     <div class="flex items-center gap-3 mt-6 mb-4">
       <span class="text-xs font-semibold px-3 py-1 rounded-full bg-cancha-700 text-white">{categoria}</span>
-      <time class="text-xs text-slate-500">{fechaFormateada}</time>
+      <time class="text-xs text-slate-500 dark:text-slate-400">{fechaFormateada}</time>
     </div>
 
-    <h1 class="font-display font-extrabold text-3xl md:text-4xl text-cancha-900 mb-3">{titulo}</h1>
-    <p class="text-slate-500 text-sm mb-8">Por {autor}</p>
+    <h1 class="font-display font-extrabold text-3xl md:text-4xl text-cancha-900 dark:text-white mb-3">{titulo}</h1>
+    <p class="text-slate-500 dark:text-slate-400 text-sm mb-8">Por {autor}</p>
 
-    <div class="prose prose-slate max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-cancha-600">
+    <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-cancha-600 dark:prose-a:text-pelota-400">
       <Content />
     </div>
   </article>

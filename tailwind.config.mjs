@@ -2,6 +2,7 @@ import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
@@ -17,6 +18,7 @@ export default {
           700: '#122f99',
           800: '#0f2575',
           900: '#0c1d5c',
+          950: '#080f38',
         },
         pelota: {
           400: '#ff9d4d',

@@ -32,12 +32,12 @@ const paraCarrusel = ordenadas.slice(0, 5);
 
   <section class="max-w-6xl mx-auto px-4 py-12">
     <div class="flex items-center justify-between mb-6">
-      <h2 class="font-display font-bold text-2xl text-cancha-900">Últimas noticias</h2>
-      <a href="/noticias" class="text-sm font-semibold text-cancha-600 hover:text-cancha-800">Ver todas →</a>
+      <h2 class="font-display font-bold text-2xl text-cancha-900 dark:text-white">Últimas noticias</h2>
+      <a href="/noticias" class="text-sm font-semibold text-cancha-600 dark:text-pelota-400 hover:text-cancha-800 dark:hover:text-pelota-300">Ver todas →</a>
     </div>
 
     {ordenadas.length === 0 ? (
-      <p class="text-slate-500">Todavía no hay noticias publicadas.</p>
+      <p class="text-slate-500 dark:text-slate-400">Todavía no hay noticias publicadas.</p>
     ) : (
       <div class="grid gap-6 md:grid-cols-2">
         {destacada && <NewsCard noticia={destacada} destacada />}
