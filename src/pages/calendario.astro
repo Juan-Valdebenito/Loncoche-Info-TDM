@@ -2,10 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 
 // Edita este arreglo para mantener actualizado el calendario de competencias.
-const eventos = [
-  { fecha: '2026-09-27', nombre: 'Torneo Regional La Araucanía', lugar: 'Temuco', estado: 'Confirmado' },
-  { fecha: '2026-10-18', nombre: 'Copa Amistad Loncoche', lugar: 'Gimnasio Municipal, Loncoche', estado: 'Por confirmar' },
-  { fecha: '2026-11-08', nombre: 'Campeonato Nacional Clasificatorio', lugar: 'Santiago', estado: 'Por confirmar' },
+// fechaDisplay es opcional: úsalo cuando no haya un día exacto (ej. "Enero - Febrero 2027").
+const eventos: { fecha: string; fechaDisplay?: string; nombre: string; lugar: string; estado: string }[] = [
+  { fecha: '2026-10-17', nombre: 'Liga Regional Los Ríos', lugar: 'Paillaco - Reumén', estado: 'Confirmado' },
+  { fecha: '2027-01-15', fechaDisplay: 'Enero - Febrero 2027', nombre: 'Open Internacional Villarrica 2027', lugar: 'Villarrica', estado: 'Por confirmar' },
 ];
 
 const estadoColor: Record<string, string> = {
@@ -33,7 +33,7 @@ function formatear(fecha: string) {
       {eventos.map((e) => (
         <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 rounded-2xl bg-white dark:bg-cancha-900 border border-slate-200 dark:border-cancha-700 p-5 shadow-sm">
           <div class="sm:w-40 shrink-0">
-            <p class="font-display font-bold text-cancha-700 dark:text-pelota-400 text-sm">{formatear(e.fecha)}</p>
+            <p class="font-display font-bold text-cancha-700 dark:text-pelota-400 text-sm">{e.fechaDisplay ?? formatear(e.fecha)}</p>
           </div>
           <div class="flex-1">
             <p class="font-semibold text-cancha-900 dark:text-white">{e.nombre}</p>
