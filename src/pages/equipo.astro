@@ -1,20 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Espacio de previsualización para 7 jugadores. Reemplaza nombre/categoria y agrega
-// foto: '/images/jugadores/archivo.jpg' cuando tengamos los datos y fotos reales.
 const jugadores: { nombre: string; categoria: string; foto?: string }[] = [
-  { nombre: 'Jugador 1', categoria: '—' },
-  { nombre: 'Jugador 2', categoria: '—' },
-  { nombre: 'Jugador 3', categoria: '—' },
-  { nombre: 'Jugador 4', categoria: '—' },
-  { nombre: 'Jugador 5', categoria: '—' },
-  { nombre: 'Jugador 6', categoria: '—' },
-  { nombre: 'Jugador 7', categoria: '—' },
+  { nombre: 'Jacob', categoria: '—', foto: '/images/jugadores/jacob.jpg' },
+  { nombre: 'Juan Pablo Valdebenito', categoria: '—', foto: '/images/jugadores/juan-pablo-valdebenito.jpg' },
+  { nombre: 'Juan Candia', categoria: '—', foto: '/images/jugadores/juan-candia.jpg' },
+  { nombre: 'Sebastián Velásquez', categoria: '—', foto: '/images/jugadores/sebastian-velasquez.jpg' },
+  { nombre: 'Sebastián Mera', categoria: '—', foto: '/images/jugadores/sebastian-mera.jpg' },
+  { nombre: 'Zahid Moana', categoria: '—', foto: '/images/jugadores/zahid-moana.jpg' },
+  { nombre: 'Nombre pendiente', categoria: '—', foto: '/images/jugadores/pendiente-1.jpg' },
+  { nombre: 'Nombre pendiente', categoria: '—', foto: '/images/jugadores/pendiente-2.jpg' },
 ];
 
 const cuerpoTecnico = [
-  { nombre: 'Sebastián Urrutia', rol: 'Entrenador ITTF' },
+  { nombre: 'Sebastián Urrutia', rol: 'Entrenador ITTF', foto: '/images/jugadores/sebastian-urrutia.jpg' },
 ];
 
 // Ranking de todos los jugadores del taller. Pendiente: reemplazar por los nombres reales.
@@ -33,14 +32,11 @@ const ranking = [
     </p>
 
     <h2 class="font-display font-semibold text-xl text-cancha-800 dark:text-white mb-4">Jugadores</h2>
-    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4 max-w-2xl">
-      Espacio de previsualización — los nombres y fotos reales se agregarán próximamente.
-    </p>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
       {jugadores.map((j) => (
         <div class="rounded-2xl bg-white dark:bg-cancha-900 border border-slate-200 dark:border-cancha-700 p-5 shadow-sm text-center">
           {j.foto ? (
-            <img src={j.foto} alt={j.nombre} class="mx-auto h-20 w-20 rounded-full object-cover mb-3" />
+            <img src={j.foto} alt={j.nombre} class="mx-auto h-20 w-20 rounded-full object-cover object-top mb-3" />
           ) : (
             <div class="mx-auto h-20 w-20 rounded-full bg-slate-100 dark:bg-cancha-800 border-2 border-dashed border-slate-300 dark:border-cancha-600 flex items-center justify-center mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-slate-300 dark:text-cancha-600" fill="currentColor" viewBox="0 0 24 24">
@@ -58,9 +54,13 @@ const ranking = [
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
       {cuerpoTecnico.map((c) => (
         <div class="rounded-2xl bg-white dark:bg-cancha-900 border border-slate-200 dark:border-cancha-700 p-5 shadow-sm text-center">
-          <div class="mx-auto h-16 w-16 rounded-full bg-pelota-100 dark:bg-pelota-500/20 text-pelota-600 dark:text-pelota-400 flex items-center justify-center font-display font-bold text-xl mb-3">
-            {c.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
-          </div>
+          {c.foto ? (
+            <img src={c.foto} alt={c.nombre} class="mx-auto h-16 w-16 rounded-full object-cover object-top mb-3" />
+          ) : (
+            <div class="mx-auto h-16 w-16 rounded-full bg-pelota-100 dark:bg-pelota-500/20 text-pelota-600 dark:text-pelota-400 flex items-center justify-center font-display font-bold text-xl mb-3">
+              {c.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+            </div>
+          )}
           <p class="font-semibold text-cancha-900 dark:text-white">{c.nombre}</p>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{c.rol}</p>
         </div>
