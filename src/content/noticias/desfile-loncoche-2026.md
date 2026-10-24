@@ -5,7 +5,7 @@ fecha: 2026-09-18
 autor: "Taller de Tenis de Mesa Municipal de Loncoche"
 categoria: "Institucional"
 imagen: "/images/desfile-2026/desfile-2026-05.jpg"
-destacada: true
+destacada: false
 ---
 
 **Taller de Tenis de Mesa Loncoche**
