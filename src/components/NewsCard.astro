@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { noticia, destacada = false } = Astro.props;
-const { titulo, resumen, fecha, categoria, imagen } = noticia.data;
+const { titulo, resumen, fecha, categoria, imagen, imagenFoco } = noticia.data;
 
 const fechaFormateada = fecha.toLocaleDateString('es-CL', {
   day: 'numeric',
@@ -20,6 +20,12 @@ const categoriaColor: Record<string, string> = {
   Convocatorias: 'bg-cancha-500 text-white',
   Torneos: 'bg-cancha-700 text-white',
   Institucional: 'bg-slate-500 text-white',
+};
+
+const focoClase: Record<string, string> = {
+  top: 'object-top',
+  center: 'object-center',
+  bottom: 'object-bottom',
 };
 ---
 
@@ -36,7 +42,8 @@ const categoriaColor: Record<string, string> = {
         src={imagen}
         alt={titulo}
         class:list={[
-          'w-full object-cover object-top saturate-[1.08] contrast-[1.03] group-hover:scale-105 transition-transform duration-500',
+          'w-full object-cover saturate-[1.08] contrast-[1.03] group-hover:scale-105 transition-transform duration-500',
+          focoClase[imagenFoco],
           destacada ? 'h-56 md:h-72' : 'h-40',
         ]}
       />

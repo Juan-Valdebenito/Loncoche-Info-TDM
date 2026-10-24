@@ -9,6 +9,7 @@ const noticias = defineCollection({
     autor: z.string().default('Cuerpo Técnico TDM Loncoche'),
     categoria: z.enum(['Resultados', 'Convocatorias', 'Torneos', 'Institucional']).default('Institucional'),
     imagen: z.string().optional(),
+    imagenFoco: z.enum(['top', 'center', 'bottom']).default('top'),
     destacada: z.boolean().default(false),
   }),
 });
